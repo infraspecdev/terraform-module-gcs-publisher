@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4
         with:
           node-version: 20
           cache: npm
@@ -32,21 +32,21 @@ jobs:
         run: npm audit --audit-level=high
         
       - name: CodeQL Initialize
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@d7eaefbfa6606a4adc96bdf7b9ba23d7fa931e69 # v3
         with:
           languages: javascript
           
       - name: CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@d7eaefbfa6606a4adc96bdf7b9ba23d7fa931e69 # v3
         
   dependency-review:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         
       - name: Dependency Review
-        uses: actions/dependency-review-action@v3
+        uses: actions/dependency-review-action@3b139cfc5fae8b618d3eae3675e383bb1769c019 # v4.5.0
         with:
           fail-on-severity: high
