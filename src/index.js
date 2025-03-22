@@ -25,17 +25,6 @@ function validateModuleName(name) {
   return name;
 }
 
-function securePathJoin(...paths) {
-  // Prevent path traversal by normalizing and validating the resulting path
-  const result = path.normalize(path.join(...paths));
-  const basePath = path.normalize(paths[0]);
-  
-  if (!result.startsWith(basePath)) {
-    throw new Error(`Path traversal detected: ${result} is outside of ${basePath}`);
-  }
-  return result;
-}
-
 function calculateFileHash(filePath) {
   return new Promise((resolve, reject) => {
     const hash = crypto.createHash('sha256');
@@ -68,10 +57,9 @@ async function run() {
       throw new Error(`Module path does not exist: ${modulePath}`);
     }
 
-    // Parse Google credentials
-    let credentials;
+    // Parse Google credentials to validate JSON format
     try {
-      credentials = JSON.parse(googleCredentialsJson);
+      JSON.parse(googleCredentialsJson);
     } catch (error) {
       throw new Error(`Failed to parse Google credentials: ${error.message}`);
     }
