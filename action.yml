@@ -1,0 +1,42 @@
+name: 'Terraform Module GCS Publisher'
+description: 'GitHub Action to push and maintain secure, versioned Terraform modules in GCS buckets with integrity verification'
+author: 'Infraspec'
+branding:
+  icon: 'upload-cloud'
+  color: 'purple'
+
+inputs:
+  gcs-bucket:
+    description: 'GCS bucket name where Terraform modules will be stored'
+    required: true
+  module-name:
+    description: 'Name of the Terraform module'
+    required: true
+  module-version:
+    description: 'Version of the Terraform module (semver format)'
+    required: true
+  module-path:
+    description: 'Path to the Terraform module directory'
+    required: true
+    default: '.'
+  google-credentials:
+    description: 'Google Cloud service account credentials (JSON)'
+    required: true
+  delete-old-versions:
+    description: 'Whether to delete old versions of the module'
+    required: false
+    default: 'false'
+  keep-versions:
+    description: 'Number of old versions to keep when deleting old versions'
+    required: false
+    default: '5'
+
+outputs:
+  module-url:
+    description: 'URL of the uploaded Terraform module'
+  version:
+    description: 'Version of the uploaded Terraform module'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

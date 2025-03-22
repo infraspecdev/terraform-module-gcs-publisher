@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    # Look for `.github/workflows` in the root directory
+    directory: "/.github/workflows"
+    # Check for updates daily
+    schedule:
+      interval: "daily"
+    # Assign pull requests to their original authors
+    assignees:
+      - "${{github.actor}}"
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    assignees:
+      - "${{github.actor}}"
