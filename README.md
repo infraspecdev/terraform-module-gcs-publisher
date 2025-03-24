@@ -1,12 +1,15 @@
 # Terraform Module GCS Publisher
 
-A GitHub Action for publishing Terraform modules to Google Cloud Storage (GCS) buckets with proper versioning.
+A GitHub Action for publishing Terraform modules to Google Cloud Storage (GCS)
+buckets with proper versioning.
 
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Terraform%20Module%20GCS%20Publisher-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=github)](https://github.com/marketplace/actions/terraform-module-gcs-publisher)
 
 ## Overview
 
-This action helps you automate the process of publishing Terraform modules to GCS buckets, which can be used as a private Terraform module registry. It handles:
+This action helps you automate the process of publishing Terraform modules to
+GCS buckets, which can be used as a private Terraform module registry. It
+handles:
 
 - Packaging Terraform modules into zip files
 - Uploading modules to GCS with proper versioning
@@ -36,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Publish Terraform Module
         uses: infraspecdev/terraform-module-gcs-publisher@v1
         with:
@@ -51,26 +54,27 @@ jobs:
 
 ## Inputs
 
-| Input | Description | Required | Default |
-|-------|-------------|----------|---------|
-| `gcs-bucket` | GCS bucket name where Terraform modules will be stored | Yes | |
-| `module-name` | Name of the Terraform module | Yes | |
-| `module-version` | Version of the Terraform module (semver format) | Yes | |
-| `module-path` | Path to the Terraform module directory | Yes | `.` |
-| `google-credentials` | Google Cloud service account credentials (JSON) | Yes | |
-| `delete-old-versions` | Whether to delete old versions of the module | No | `false` |
-| `keep-versions` | Number of old versions to keep when deleting old versions | No | `5` |
+| Input                 | Description                                               | Required | Default |
+| --------------------- | --------------------------------------------------------- | -------- | ------- |
+| `gcs-bucket`          | GCS bucket name where Terraform modules will be stored    | Yes      |         |
+| `module-name`         | Name of the Terraform module                              | Yes      |         |
+| `module-version`      | Version of the Terraform module (semver format)           | Yes      |         |
+| `module-path`         | Path to the Terraform module directory                    | Yes      | `.`     |
+| `google-credentials`  | Google Cloud service account credentials (JSON)           | Yes      |         |
+| `delete-old-versions` | Whether to delete old versions of the module              | No       | `false` |
+| `keep-versions`       | Number of old versions to keep when deleting old versions | No       | `5`     |
 
 ## Outputs
 
-| Output | Description |
-|--------|-------------|
-| `module-url` | URL of the uploaded Terraform module |
-| `version` | Version of the uploaded Terraform module |
+| Output       | Description                              |
+| ------------ | ---------------------------------------- |
+| `module-url` | URL of the uploaded Terraform module     |
+| `version`    | Version of the uploaded Terraform module |
 
 ## Using Published Modules
 
-You can reference the modules in your Terraform code by specifying the exact version:
+You can reference the modules in your Terraform code by specifying the exact
+version:
 
 ```hcl
 module "vpc" {
@@ -78,7 +82,8 @@ module "vpc" {
 }
 ```
 
-This approach ensures consistent and predictable deployments by pinning to specific module versions.
+This approach ensures consistent and predictable deployments by pinning to
+specific module versions.
 
 ## Setting Up GCP Permissions
 
@@ -91,8 +96,11 @@ The service account used by this GitHub Action needs the following permissions:
 
 ## Contributing
 
-Contributions are welcome. Submit a Pull Request to contribute to this project.
+Contributions are welcome. Please see [DEVELOPMENT.md](DEVELOPMENT.md) for
+development setup, guidelines, and workflow information. Submit a Pull Request
+to contribute to this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.
