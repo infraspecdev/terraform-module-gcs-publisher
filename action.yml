@@ -1,5 +1,7 @@
 name: 'Terraform Module GCS Publisher'
-description: 'GitHub Action to push and maintain secure, versioned Terraform modules in GCS buckets with integrity verification'
+description:
+  'GitHub Action to push and maintain secure, versioned Terraform modules in GCS
+  buckets with integrity verification'
 author: 'Infraspec'
 branding:
   icon: 'upload-cloud'
