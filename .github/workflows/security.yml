@@ -32,12 +32,12 @@ jobs:
         run: npm audit --audit-level=high
 
       - name: CodeQL Initialize
-        uses: github/codeql-action/init@d7eaefbfa6606a4adc96bdf7b9ba23d7fa931e69 # v3
+        uses: github/codeql-action/init@5f8171a638ada777af81d42b55959a643bb29017 # v3
         with:
           languages: javascript
 
       - name: CodeQL Analysis
-        uses: github/codeql-action/analyze@d7eaefbfa6606a4adc96bdf7b9ba23d7fa931e69 # v3
+        uses: github/codeql-action/analyze@5f8171a638ada777af81d42b55959a643bb29017 # v3
 
   dependency-review:
     runs-on: ubuntu-latest
