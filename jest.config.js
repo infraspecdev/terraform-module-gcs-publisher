@@ -6,4 +6,4 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.ts'],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov']
-};
+}
