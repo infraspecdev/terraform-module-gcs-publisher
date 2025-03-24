@@ -103,7 +103,9 @@ function getValidatedInputs() {
         moduleName: core.getInput('module-name', { required: true }),
         moduleVersion: core.getInput('module-version', { required: true }),
         modulePath: core.getInput('module-path', { required: true }),
-        googleCredentialsJson: core.getInput('google-credentials', { required: true }),
+        googleCredentialsJson: core.getInput('google-credentials', {
+            required: true
+        }),
         deleteOldVersions: core.getInput('delete-old-versions') === 'true',
         keepVersions: parseInt(core.getInput('keep-versions') || '5', 10)
     };

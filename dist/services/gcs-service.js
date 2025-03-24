@@ -121,7 +121,7 @@ class GCSService {
         const bucket = this.storage.bucket(bucketName);
         // Get all versions
         const [files] = await bucket.getFiles({
-            prefix: moduleFolder,
+            prefix: moduleFolder
         });
         // Filter to just the version files for this module and parse their versions
         const versionFiles = [];
