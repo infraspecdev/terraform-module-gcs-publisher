@@ -1,4 +1,14 @@
 "use strict";
+/**
+ * @fileoverview Service for interacting with Google Cloud Storage (GCS).
+ * This module provides functionality for uploading Terraform modules to GCS buckets,
+ * managing metadata, and handling version cleanup operations. It abstracts all direct
+ * interactions with the Google Cloud Storage API and provides a clean interface for
+ * the main application logic.
+ *
+ * @author Infraspec
+ * @license MIT
+ */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -52,13 +62,19 @@ class GCSService {
         });
     }
     /**
-     * Uploads a file to Google Cloud Storage
+     * Uploads a file to Google Cloud Storage with appropriate metadata.
+     * This method handles the entire upload process including setting metadata,
+     * making the file publicly accessible, and verifying the upload success.
      *
-     * @param bucketName - Name of the GCS bucket
-     * @param filePath - Local path to the file to upload
-     * @param destination - Destination path in the bucket
+     * @param bucketName - Name of the GCS bucket where the file will be uploaded
+     * @param filePath - Absolute local path to the file to upload
+     * @param destination - Destination path within the bucket (e.g., 'modules/my-module/my-module-1.0.0.zip')
      * @param fileHash - SHA-256 hash of the file for integrity verification
-     * @returns The public URL of the uploaded file
+     * @returns The public URL of the uploaded file (https://storage.googleapis.com/{bucket}/{path})
+     * @throws {Error} When the bucket doesn't exist or authentication fails
+     * @throws {Error} When the file at filePath cannot be read
+     * @throws {Error} When the upload fails due to network issues
+     * @throws {Error} When verification fails (uploaded file not found in bucket)
      */
     async uploadToGCS(bucketName, filePath, destination, fileHash) {
         const bucket = this.storage.bucket(bucketName);
@@ -88,13 +104,18 @@ class GCSService {
         return `https://storage.googleapis.com/${bucketName}/${destination}`;
     }
     /**
-     * Cleans up old versions of the module while keeping the specified number of recent versions
+     * Cleans up old versions of the module while keeping the specified number of recent versions.
+     * This method retrieves all versions of a module, sorts them semantically,
+     * and deletes older versions exceeding the keepVersions limit.
      *
-     * @param bucketName - Name of the GCS bucket
-     * @param moduleFolder - Folder path in the bucket containing the module versions
-     * @param moduleName - Name of the module
-     * @param currentVersion - The current version being uploaded (will not be deleted)
-     * @param keepVersions - Number of recent versions to keep
+     * @param bucketName - Name of the GCS bucket containing module versions
+     * @param moduleFolder - Folder path in the bucket containing the module versions (e.g., 'modules/my-module')
+     * @param moduleName - Name of the module used to identify version files
+     * @param currentVersion - The current version being uploaded (will always be kept, not deleted)
+     * @param keepVersions - Number of recent versions to keep (including current version)
+     * @throws {Error} When the bucket doesn't exist or authentication fails
+     * @throws {Error} When file listing or deletion operations fail
+     * @throws {Error} When there are problems parsing version numbers
      */
     async cleanupOldVersions(bucketName, moduleFolder, moduleName, currentVersion, keepVersions) {
         const bucket = this.storage.bucket(bucketName);
