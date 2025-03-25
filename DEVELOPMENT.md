@@ -8,6 +8,17 @@ Module GCS Publisher.
 - Node.js (version specified in `.node-version`)
 - npm
 
+## Tool Installation
+
+### Required System Tools
+
+1. Install yamllint:
+
+   ```bash
+   # macOS
+   brew install yamllint
+   ```
+
 ## Setup Development Environment
 
 1. Clone the repository:
@@ -22,6 +33,15 @@ Module GCS Publisher.
    ```bash
    # If you use nodenv, nvm, asdf, volta, etc:
    # They will automatically read the version from .node-version
+
+   # Using nvm
+   nvm use
+
+   # Using nodenv
+   nodenv local
+
+   # Using homebrew on macOS
+   brew install nodejs
    ```
 
 1. Install dependencies:
@@ -35,6 +55,18 @@ Module GCS Publisher.
    ```bash
    npm run prepare
    ```
+
+### Node.js Tools
+
+The following tools are automatically installed as part of the `npm ci` command:
+
+- **TypeScript** - Strongly typed JavaScript
+- **ESLint** - TypeScript/JavaScript linting
+- **Prettier** - Code formatting
+- **markdownlint-cli** - Markdown linting
+- **Jest** - Testing framework
+- **Husky** - Git hooks
+- **@vercel/ncc** - Compiler for Node.js
 
 ## Development Workflow
 
