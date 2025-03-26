@@ -19,6 +19,20 @@ Module GCS Publisher.
    brew install yamllint
    ```
 
+2. Install markdownlint:
+
+   ```bash
+   # macOS
+   brew install markdownlint
+   ```
+
+3. Install yamllint:
+
+   ```bash
+   # macOS
+   brew install yamllint
+   ```
+
 ## Setup Development Environment
 
 1. Clone the repository:
@@ -28,7 +42,7 @@ Module GCS Publisher.
    cd terraform-module-gcs-publisher
    ```
 
-1. Use the correct Node.js version:
+2. Use the correct Node.js version:
 
    ```bash
    # If you use nodenv, nvm, asdf, volta, etc:
@@ -44,13 +58,13 @@ Module GCS Publisher.
    brew install nodejs
    ```
 
-1. Install dependencies:
+3. Install dependencies:
 
    ```bash
    npm ci
    ```
 
-1. Set up Git hooks:
+4. Set up Git hooks:
 
    ```bash
    npm run prepare
@@ -93,8 +107,8 @@ standardized environment. The Node.js version used in CI is managed through the
 ## Release Process
 
 1. Update version in package.json
-1. Create a new GitHub release
-1. Tag the release (following semantic versioning)
+2. Create a new GitHub release
+3. Tag the release (following semantic versioning)
 
 The CI/CD pipeline will automatically build and test the code before publishing
 to the GitHub Marketplace.
